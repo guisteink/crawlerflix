@@ -14,21 +14,26 @@ import
     Td,
     TableCaption,
 } from '@chakra-ui/react'
+import Crawler from '../services/crawler'
 
 const countries = [
-    'United States', 'Canada', 'France', 'Germany', 'United Kingdom', 'Brazil', 'Argentina', 'Portugal', 'Spain', 'Paraguay'
+    'united-states', 'canada', 'france', 'germany', 'united-kingdom', 'brazil', 'argentina', 'portugal', 'spain', 'paraguay'
 ]
 
 export default function Card()
 {
-    const [type, setType] = React.useState('film')
-    const [country, setCountry] = React.useState('Brazil')
+    const [type, setType] = React.useState('films')
+    const [country, setCountry] = React.useState('brazil')
 
     React.useEffect(() =>
     {
-        console.log('type: ', type)
-        console.log('country: ', country)
+        loadData()
     }, [type, country])
+
+    const loadData = async () =>
+    {
+        return await Crawler.search(type, country)
+    }
 
     return (
         <>
@@ -36,8 +41,8 @@ export default function Card()
                 <Box pl="5" pr="5">
                     <RadioGroup onChange={setType} value={type}>
                         <Stack direction='row'>
-                            <Radio value='film'>Movie</Radio>
-                            <Radio value='serie'>Series</Radio>
+                            <Radio value='films'>Movie</Radio>
+                            <Radio value='tv'>Series</Radio>
                         </Stack>
                     </RadioGroup>
                 </Box>
@@ -74,7 +79,7 @@ export default function Card()
                         <Tr>
                             <Td>3</Td>
                             <Td>inches</Td>
-                            <Td isNumeric>3 (m)</Td>
+                            <Td isNumeric>3</Td>
                         </Tr>
                     </Tbody>
                 </Table>
