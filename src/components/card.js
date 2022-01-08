@@ -9,6 +9,7 @@ import
     Thead,
     Tbody,
     Tfoot,
+    Progress,
     Tr,
     Th,
     Td,
@@ -28,11 +29,19 @@ export default function Card()
     const [data, setData] = React.useState([])
     const [week, setWeek] = React.useState('')
     const [loading, setLoading] = React.useState(false)
+    const [maxWeeksOnTop, setMaxWeeksOnTop] = React.useState()
 
     React.useEffect(() =>
     {
         loadData()
     }, [type, country])
+
+    const getMax = (array) =>
+    {
+        let max = 0, i = 0;
+        for (i = 0; i < array.length; i++) { if (max < array[i].weeksOnTop) max = array[i].weeksOnTop }
+        setMaxWeeksOnTop(max)
+    }
 
     const loadData = async () =>
     {
@@ -41,6 +50,7 @@ export default function Card()
             const response = await Crawler.search(type, country)
             setData(response.array)
             setWeek(response.week)
+            getMax(response.array)
             setLoading(false)
         } catch (error) {
             console.log(error)
@@ -85,7 +95,7 @@ export default function Card()
                             <Tr>
                                 <Th>Position</Th>
                                 <Th>{type === "tv" ? "Series" : "Movie"}</Th>
-                                <Th isNumeric>Weeks on top10</Th>
+                                <Th isNumeric>Weeks on top10 (max weeks {maxWeeksOnTop})</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -95,7 +105,7 @@ export default function Card()
                                     <Tr>
                                         <Td>{item.position}</Td>
                                         <Td>{item.title}</Td>
-                                        <Td isNumeric>{item.weeksOnTop}</Td>
+                                        <Td><Progress value={(item.weeksOnTop / maxWeeksOnTop) * 100} />{item.weeksOnTop}</Td>
                                     </Tr>
                                 )
                             })}
