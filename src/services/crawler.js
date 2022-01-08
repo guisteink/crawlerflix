@@ -2,7 +2,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const pretty = require("pretty");
 const _ = require("lodash")
-const moment = require("moment")
+const moment = require("moment");
+const { forEach } = require("lodash");
 
 class Crawler
 {
@@ -26,6 +27,15 @@ class Crawler
             const response = await this.axios(base + `/${country}/${type}`)
             const $ = this.cheerio.load(response.data)
             const list = $('.list-table')
+            let week = $('.tracking-wider')
+
+            _.forEach(week, (item, index) =>
+            {
+                if (index === 1) {
+                    week = $(item).text()
+                    return false;
+                }
+            })
 
             if (list.length) {
                 for (let item of list) {
@@ -58,7 +68,7 @@ class Crawler
                 }
             }
 
-            return array
+            return { array, week }
         } catch (error) {
             console.log(error, error.message);
         }

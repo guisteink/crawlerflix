@@ -13,6 +13,7 @@ import
     Th,
     Td,
     TableCaption,
+    Spinner
 } from '@chakra-ui/react'
 import Crawler from '../services/crawler'
 
@@ -25,6 +26,8 @@ export default function Card()
     const [type, setType] = React.useState('films')
     const [country, setCountry] = React.useState('brazil')
     const [data, setData] = React.useState([])
+    const [week, setWeek] = React.useState('')
+    const [loading, setLoading] = React.useState(false)
 
     React.useEffect(() =>
     {
@@ -34,11 +37,14 @@ export default function Card()
     const loadData = async () =>
     {
         try {
+            setLoading(true)
             const response = await Crawler.search(type, country)
-            setData(response)
-
+            setData(response.array)
+            setWeek(response.week)
+            setLoading(false)
         } catch (error) {
             console.log(error)
+            setLoading(false)
         }
     }
 
@@ -63,28 +69,39 @@ export default function Card()
                 </Box>
             </Flex >
             <Flex align="center" justify="center" mb="5" mt="5" bg="white" w="100%" h="auto">
-                <Table w="100%" variant='simple'>
-                    <TableCaption>This week</TableCaption>
-                    <Thead>
-                        <Tr>
-                            <Th>#</Th>
-                            <Th>{type}</Th>
-                            <Th isNumeric>Weeks on top10</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {_.map(data, item =>
-                        {
-                            return (
-                                <Tr>
-                                    <Td>{item.position}</Td>
-                                    <Td>{item.title}</Td>
-                                    <Td isNumeric>{item.weeksOnTop}</Td>
-                                </Tr>
-                            )
-                        })}
-                    </Tbody>
-                </Table>
+                {loading ?
+                    <Flex align="center" justify="center" h="50vh">
+                        <Spinner
+                            thickness='4px'
+                            speed='0.65s'
+                            emptyColor='gray.200'
+                            color='blue.500'
+                            size='xl' />
+                    </Flex>
+                    :
+                    <Table w="100%" mb="10" variant='simple'>
+                        <TableCaption>{week}</TableCaption>
+                        <Thead>
+                            <Tr>
+                                <Th>Position</Th>
+                                <Th>{type === "tv" ? "Series" : "Movie"}</Th>
+                                <Th isNumeric>Weeks on top10</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            {_.map(data, item =>
+                            {
+                                return (
+                                    <Tr>
+                                        <Td>{item.position}</Td>
+                                        <Td>{item.title}</Td>
+                                        <Td isNumeric>{item.weeksOnTop}</Td>
+                                    </Tr>
+                                )
+                            })}
+                        </Tbody>
+                    </Table>
+                }
             </Flex >
 
         </>
