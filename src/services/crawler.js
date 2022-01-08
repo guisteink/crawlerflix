@@ -73,6 +73,6 @@ class Crawler
             console.log(error, error.message);
         }
     }
-
 }
-module.exports = new Crawler()
+
+export default new Crawler()
