@@ -24,6 +24,7 @@ export default function Card()
 {
     const [type, setType] = React.useState('films')
     const [country, setCountry] = React.useState('brazil')
+    const [data, setData] = React.useState([])
 
     React.useEffect(() =>
     {
@@ -32,7 +33,13 @@ export default function Card()
 
     const loadData = async () =>
     {
-        return await Crawler.search(type, country)
+        try {
+            const response = await Crawler.search(type, country)
+            setData(response)
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -66,21 +73,16 @@ export default function Card()
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>1</Td>
-                            <Td>inches</Td>
-                            <Td isNumeric>12</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>2</Td>
-                            <Td>inches</Td>
-                            <Td isNumeric>4</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>3</Td>
-                            <Td>inches</Td>
-                            <Td isNumeric>3</Td>
-                        </Tr>
+                        {_.map(data, item =>
+                        {
+                            return (
+                                <Tr>
+                                    <Td>{item.position}</Td>
+                                    <Td>{item.title}</Td>
+                                    <Td isNumeric>{item.weeksOnTop}</Td>
+                                </Tr>
+                            )
+                        })}
                     </Tbody>
                 </Table>
             </Flex >
