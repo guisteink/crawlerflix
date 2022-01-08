@@ -39,7 +39,11 @@ export default function Card()
     const getMax = (array) =>
     {
         let max = 0, i = 0;
-        for (i = 0; i < array.length; i++) { if (max < array[i].weeksOnTop) max = array[i].weeksOnTop }
+        for (i = 0; i < array.length; i++) {
+            if (parseInt(array[i].weeksOnTop) >= parseInt(max)) {
+                max = array[i].weeksOnTop
+            }
+        }
         setMaxWeeksOnTop(max)
     }
 
@@ -49,6 +53,7 @@ export default function Card()
             setLoading(true)
             const response = await Crawler.search(type, country)
             setData(response.array)
+            console.log(response.array)
             setWeek(response.week)
             getMax(response.array)
             setLoading(false)
