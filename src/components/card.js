@@ -52,9 +52,10 @@ export default function Card()
         try {
             setLoading(true)
             const response = await Crawler.search(type, country)
-            setData(response.array)
-            setWeek(response.week)
-            getMax(response.array)
+            console.log(response)
+            setData(_.get(response, 'array'))
+            setWeek(_.get(response, 'week'))
+            getMax(_.get(response, 'array'))
             setLoading(false)
         } catch (error) {
             console.log(error)
@@ -103,37 +104,16 @@ export default function Card()
                             </Tr>
                         </Thead>
                         <Tbody>
-
-                            <Tr>
-                                <Td>TESTE</Td>
-                                <Td>TESTE</Td>
-                                <Td><Progress value={45} />5</Td>
-                            </Tr>
-                            <Tr>
-                                <Td>TESTE</Td>
-                                <Td>TESTE</Td>
-                                <Td><Progress value={45} />5</Td>
-                            </Tr>
-                            <Tr>
-                                <Td>TESTE</Td>
-                                <Td>TESTE</Td>
-                                <Td><Progress value={45} />5</Td>
-                            </Tr>
-                            <Tr>
-                                <Td>TESTE</Td>
-                                <Td>TESTE</Td>
-                                <Td><Progress value={45} />5</Td>
-                            </Tr>
-                            {/* {_.map(data, (item, index) =>
+                            {_.map(data, (item, index) =>
                             {
                                 return (
                                     <Tr key={index}>
                                         <Td>{item.position}</Td>
                                         <Td>{item.title}</Td>
-                                        <Td><Progress value={(item.weeksOnTop / maxWeeksOnTop) * 100} />{item.weeksOnTop}</Td>
+                                        <Td><Progress value={(parseInt(item.weeksOnTop) / maxWeeksOnTop) * 100} />{item.weeksOnTop}</Td>
                                     </Tr>
                                 )
-                            })} */}
+                            })}
                         </Tbody>
                     </Table>
                 }
