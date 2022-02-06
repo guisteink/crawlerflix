@@ -12,11 +12,15 @@ class Crawler
         this.axios = axios
         this.cheerio = cheerio
         this.pretty = pretty
+
     }
 
     async search(type, country)
     {
         try {
+            this.axios.defaults.headers['Content-Type'] = 'application/json';
+            this.axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+
             let array = []
 
             let arrayPositions = []
