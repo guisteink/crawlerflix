@@ -18,8 +18,8 @@ class Crawler
     async search(type, country)
     {
         try {
-            this.axios.defaults.headers['Content-Type'] = 'application/json';
-            this.axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+            // this.axios.defaults.headers['Content-Type'] = 'application/json';
+            // this.axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
 
             let array = []
 
@@ -28,7 +28,7 @@ class Crawler
             let arrayWeeks = []
 
             const base = `https://top10.netflix.com`
-            const response = await this.axios(base + `/${country}/${type}`)
+            const response = await this.axios.get(base + `/${country}/${type}`)
             const $ = this.cheerio.load(response.data)
             const list = $('.list-table')
             let week = $('.tracking-wider')
