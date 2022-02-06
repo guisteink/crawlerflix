@@ -2,8 +2,6 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const pretty = require("pretty");
 const _ = require("lodash")
-const moment = require("moment");
-const { forEach } = require("lodash");
 
 class Crawler
 {
@@ -12,15 +10,11 @@ class Crawler
         this.axios = axios
         this.cheerio = cheerio
         this.pretty = pretty
-
     }
 
     async search(type, country)
     {
         try {
-            // this.axios.defaults.headers['Content-Type'] = 'application/json';
-            // this.axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-
             let array = []
 
             let arrayPositions = []

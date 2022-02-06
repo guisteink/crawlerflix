@@ -8,7 +8,6 @@ import
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Progress,
     Tr,
     Th,
@@ -52,7 +51,6 @@ export default function Card()
         try {
             setLoading(true)
             const response = await Crawler.search(type, country)
-            console.log(response)
             setData(_.get(response, 'array'))
             setWeek(_.get(response, 'week'))
             getMax(_.get(response, 'array'))
