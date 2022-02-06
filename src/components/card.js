@@ -82,9 +82,9 @@ export default function Card()
                     </Select>
                 </Box>
             </Flex >
-            <Flex align="center"  mb="5" mt="5" bg="white">
+            <Flex justify="center" align="center" mb="5" mt="5" bg="white">
                 {loading ?
-                    <Flex align="center" justify="center" h="50vh">
+                    <Flex align="center" h="50vh">
                         <Spinner
                             thickness='4px'
                             speed='0.65s'
@@ -103,10 +103,10 @@ export default function Card()
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {_.map(data, item =>
+                            {_.map(data, (item, index) =>
                             {
                                 return (
-                                    <Tr>
+                                    <Tr key={index}>
                                         <Td>{item.position}</Td>
                                         <Td>{item.title}</Td>
                                         <Td><Progress value={(item.weeksOnTop / maxWeeksOnTop) * 100} />{item.weeksOnTop}</Td>
@@ -117,7 +117,6 @@ export default function Card()
                     </Table>
                 }
             </Flex >
-
         </>
     );
 }
