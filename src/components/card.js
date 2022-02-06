@@ -1,7 +1,7 @@
 import { Heading, Flex } from '@chakra-ui/react'
 import { Box, } from '@chakra-ui/react'
 import { Radio, RadioGroup, Stack, Select, Container, SimpleGrid } from '@chakra-ui/react'
-import React from 'react'
+import { useEffect, useState } from 'react'
 import _ from 'lodash'
 import
 {
@@ -24,14 +24,14 @@ const countries = [
 
 export default function Card()
 {
-    const [type, setType] = React.useState('films')
-    const [country, setCountry] = React.useState('brazil')
-    const [data, setData] = React.useState([])
-    const [week, setWeek] = React.useState('')
-    const [loading, setLoading] = React.useState(false)
-    const [maxWeeksOnTop, setMaxWeeksOnTop] = React.useState()
+    const [type, setType] = useState('films')
+    const [country, setCountry] = useState('brazil')
+    const [data, setData] = useState([])
+    const [week, setWeek] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [maxWeeksOnTop, setMaxWeeksOnTop] = useState()
 
-    React.useEffect(() =>
+    useEffect(() =>
     {
         loadData()
     }, [type, country])
