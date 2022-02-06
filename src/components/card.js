@@ -103,7 +103,28 @@ export default function Card()
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {_.map(data, (item, index) =>
+
+                            <Tr>
+                                <Td>TESTE</Td>
+                                <Td>TESTE</Td>
+                                <Td><Progress value={45} />5</Td>
+                            </Tr>
+                            <Tr>
+                                <Td>TESTE</Td>
+                                <Td>TESTE</Td>
+                                <Td><Progress value={45} />5</Td>
+                            </Tr>
+                            <Tr>
+                                <Td>TESTE</Td>
+                                <Td>TESTE</Td>
+                                <Td><Progress value={45} />5</Td>
+                            </Tr>
+                            <Tr>
+                                <Td>TESTE</Td>
+                                <Td>TESTE</Td>
+                                <Td><Progress value={45} />5</Td>
+                            </Tr>
+                            {/* {_.map(data, (item, index) =>
                             {
                                 return (
                                     <Tr key={index}>
@@ -112,7 +133,7 @@ export default function Card()
                                         <Td><Progress value={(item.weeksOnTop / maxWeeksOnTop) * 100} />{item.weeksOnTop}</Td>
                                     </Tr>
                                 )
-                            })}
+                            })} */}
                         </Tbody>
                     </Table>
                 }
