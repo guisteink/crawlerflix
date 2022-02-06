@@ -109,8 +109,8 @@ export default function Card()
                                 return (
                                     <Tr key={index}>
                                         <Td>{item.position}</Td>
-                                        <Td>{item.title}</Td>
-                                        <Td><Progress value={(parseInt(item.weeksOnTop) / maxWeeksOnTop) * 100} />{item.weeksOnTop}</Td>
+                                        {/* <Td>{item.title}</Td> */}
+                                        {/* <Td><Progress value={(parseInt(item.weeksOnTop) / maxWeeksOnTop) * 100} />{item.weeksOnTop}</Td> */}
                                     </Tr>
                                 )
                             })}
