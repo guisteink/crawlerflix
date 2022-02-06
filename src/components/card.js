@@ -84,7 +84,7 @@ export default function Card()
                 </Box>
             </Flex >
             <Flex justify="center" align="center" mb="5" mt="5" bg="white">
-                {loading ?
+                {/* {loading ?
                     <Flex align="center" h="50vh">
                         <Spinner
                             thickness='4px'
@@ -93,7 +93,7 @@ export default function Card()
                             color='blue.500'
                             size='xl' />
                     </Flex>
-                    :
+                    : */}
                     <Table mb="10" variant='simple'>
                         <TableCaption>{week}</TableCaption>
                         <Thead>
@@ -108,15 +108,16 @@ export default function Card()
                             {
                                 return (
                                     <Tr key={index}>
-                                        <Td>{item.position}</Td>
-                                        {/* <Td>{item.title}</Td> */}
-                                        {/* <Td><Progress value={(parseInt(item.weeksOnTop) / maxWeeksOnTop) * 100} />{item.weeksOnTop}</Td> */}
+                                        <Td>titles</Td>
+                                        {/* <Td>{item.position}</Td> */}
+                                        <Td>{item.title}</Td>
+                                        <Td><Progress value={(parseInt(item.weeksOnTop) / maxWeeksOnTop) * 100} />{item.weeksOnTop}</Td>
                                     </Tr>
                                 )
                             })}
                         </Tbody>
                     </Table>
-                }
+                {/* } */}
             </Flex >
         </>
     );
