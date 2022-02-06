@@ -82,7 +82,7 @@ export default function Card()
                     </Select>
                 </Box>
             </Flex >
-            <Flex align="center" justify="center" mb="5" mt="5" bg="white" w="100%" h="auto">
+            <Flex align="center"  mb="5" mt="5" bg="white">
                 {loading ?
                     <Flex align="center" justify="center" h="50vh">
                         <Spinner
@@ -93,7 +93,7 @@ export default function Card()
                             size='xl' />
                     </Flex>
                     :
-                    <Table w="100%" mb="10" variant='simple'>
+                    <Table mb="10" variant='simple'>
                         <TableCaption>{week}</TableCaption>
                         <Thead>
                             <Tr>
