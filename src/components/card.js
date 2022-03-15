@@ -15,7 +15,6 @@ import
     TableCaption,
     Spinner
 } from '@chakra-ui/react'
-import Crawler from '../services/crawler'
 import api from '../services/api'
 
 const countries = [
