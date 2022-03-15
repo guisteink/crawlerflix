@@ -16,6 +16,7 @@ import
     Spinner
 } from '@chakra-ui/react'
 import Crawler from '../services/crawler'
+import api from '../services/api'
 
 const countries = [
     'united-states', 'canada', 'france', 'germany', 'united-kingdom', 'brazil', 'argentina', 'portugal', 'spain', 'paraguay'
@@ -50,10 +51,10 @@ export default function Card()
     {
         try {
             setLoading(true)
-            const response = await Crawler.search(type, country)
-            setData(_.get(response, 'array'))
-            setWeek(_.get(response, 'week'))
-            getMax(_.get(response, 'array'))
+            const response = await api.search(type, country)
+            setData(_.get(response.data, 'array'))
+            setWeek(_.get(response.data, 'week'))
+            getMax(_.get(response.data, 'array'))
             setLoading(false)
         } catch (error) {
             console.log(error)

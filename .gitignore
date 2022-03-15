@@ -5,11 +5,12 @@
 /.pnp
 .pnp.js
 .env
+yarn.lockfile
 
 # testing
 /coverage
 
-# production
+# productioncls
 /build
 
 # misc
