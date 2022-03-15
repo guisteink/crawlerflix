@@ -38,7 +38,7 @@ export default function Card()
     const getMax = (array) =>
     {
         let max = 0, i = 0;
-        for (i = 0; i < array.length; i++) {
+        for (i = 0; i < array?.length; i++) {
             if (parseInt(array[i].weeksOnTop) >= parseInt(max)) {
                 max = array[i].weeksOnTop
             }
@@ -51,6 +51,7 @@ export default function Card()
         try {
             setLoading(true)
             const response = await api.search(type, country)
+            console.log(response)
             setData(_.get(response.data, 'array'))
             setWeek(_.get(response.data, 'week'))
             getMax(_.get(response.data, 'array'))

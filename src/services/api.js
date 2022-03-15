@@ -1,7 +1,7 @@
 import { create } from 'axios';
 
 // const base = "http://localhost:8000/crawler"
-const base = process.env.API
+const base = "https://crawlerflix-api.herokuapp.com/crawler/"
 
 const api = create({
     baseURL: base,
